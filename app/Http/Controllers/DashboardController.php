@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\HouseRent;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
@@ -17,7 +18,26 @@ class DashboardController extends Controller
     }
     public function store(Request $request)
     {
-      dump($request->all());
+        $data = $request->validate([
+            'title' => 'required|max:255',
+            'price' => 'required',
+            'description' => 'required|max:500',
+            'category' => 'required|max:255',
+            'image' => 'image|required|mimes:jpeg,png,jpg|max:2048'
+        ]);
+
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $file_name = time() . "-" . trim($image->getClientOriginalName());
+            $path = public_path() . '/menu_images';
+            $image->move($path, $file_name);
+            $data['image'] = $path . "/" . $file_name;
+            $data['created_at'] = now();
+            $data['updated_at'] = now();
+            DB::table('menus')->insert([$data]);
+        }
+
+        return back()->with('status', "Menu added successfully");
     }
     public function menue()
     {
@@ -43,5 +63,4 @@ class DashboardController extends Controller
     {
         return view('admin.pages.manage_book_message');
     }
-
 }
