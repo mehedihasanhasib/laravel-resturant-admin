@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ChefController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MenuController;
@@ -10,7 +11,6 @@ use Illuminate\Support\Facades\Route;
 
 // user interface
 Route::get('/', [HomeController::class, 'index'])->name('home');
-
 
 
 // Admin auth(login/registration) route
@@ -41,8 +41,11 @@ Route::put('/review/{id}', [ReviewController::class, 'update'])->name('review.up
 Route::delete('/review/{id}', [ReviewController::class, 'destroy'])->name('review.delete')->middleware('AdminMiddleware');
 
 // admin add chefs
-Route::get('/manage_chefs', [DashboardController::class, 'manage_chefs'])->name('manage_chefs')->middleware('AdminMiddleware');
-Route::get('/add_chefs', [DashboardController::class, 'add_chefs'])->name('add_chefs')->middleware('AdminMiddleware');
-Route::post('/add_chefs', [DashboardController::class, 'add_chefs'])->name('add_chefs')->middleware('AdminMiddleware');
+Route::get('/manage_chefs', [ChefController::class, 'index'])->name('manage_chefs')->middleware('AdminMiddleware');
+Route::get('/add_chefs', [ChefController::class, 'create'])->name('add_chefs')->middleware('AdminMiddleware');
+Route::post('/add_chefs', [ChefController::class, 'store'])->name('add_chefs.store')->middleware('AdminMiddleware');
+Route::get('/chefs/{id}', [ChefController::class, 'edit'])->name('add_chefs.edit')->middleware('AdminMiddleware');
+Route::put('/chefs/{id}', [ChefController::class, 'update'])->name('add_chefs.update')->middleware('AdminMiddleware');
+Route::delete('/chefs/{id}', [ChefController::class, 'destroy'])->name('add_chefs.delete')->middleware('AdminMiddleware');
 
 Route::get('/manage_book_message', [DashboardController::class, 'manage_book_message'])->name('manage_book_message')->middleware('AdminMiddleware');

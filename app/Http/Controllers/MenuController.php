@@ -90,6 +90,18 @@ class MenuController extends Controller
         ]);
 
         if ($request->hasFile('image')) {
+
+            $imagePath = DB::table('menus')
+                ->where('id', $id)
+                ->value('image');
+
+            if ($imagePath) {
+                $fullImagePath = public_path('menu_images/' . $imagePath);
+                if (File::exists($fullImagePath)) {
+                    File::delete($fullImagePath);
+                }
+            }
+
             $image = $request->file('image');
             $file_name = time() . "-" . trim($image->getClientOriginalName());
             $path = public_path() . '/menu_images';

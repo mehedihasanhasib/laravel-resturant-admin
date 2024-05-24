@@ -25,12 +25,11 @@
                                 <tr>
                                     <td class="align-middle" scope="row">
                                         <img src="{{ 'review_images/' . $review->image }}" alt="image" width="50">
-                                        </t class="align-middle"d>
+                                    </td class="align-middle"d>
                                     <td class="align-middle">{{ $review->name }}</td>
                                     <td class="align-middle">{{ $review->position }}</td>
                                     <td class="align-middle">{{ Str::limit($review->description, 50) }}</td>
                                     <td class="align-middle">
-
                                         <form action="{{ url('/review', ['id' => $review->id]) }}" class="inline-block">
                                             <button class="btn btn-sm btn-success">Edit</button>
                                         </form>
