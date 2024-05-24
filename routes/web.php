@@ -24,7 +24,9 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin')->
 Route::get('/add_menue', [DashboardController::class, 'add_menue'])->name('add_menue')->middleware('AdminMiddleware');
 Route::post('/add_menue', [DashboardController::class, 'store'])->name('add_menue.store')->middleware('AdminMiddleware');
 Route::get('/menue', [DashboardController::class, 'menue'])->name('menue')->middleware('AdminMiddleware');
-
+Route::get('/menu/{id}', [DashboardController::class, 'edit'])->name('menu.edit')->middleware('AdminMiddleware');
+Route::put('/menu/{id}', [DashboardController::class, 'update'])->name('menu.update')->middleware('AdminMiddleware');
+Route::delete('/menu/{id}', [DashboardController::class, 'destroy'])->name('menu.delete')->middleware('AdminMiddleware');
 
 Route::get('/add_review', [DashboardController::class, 'add_review'])->name('add_review')->middleware('AdminMiddleware');
 Route::get('/manage_review', [DashboardController::class, 'manage_review'])->name('manage_review')->middleware('AdminMiddleware');
