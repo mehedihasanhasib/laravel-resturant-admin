@@ -12,17 +12,17 @@
                                 {{ session()->get('status') }}
                             </div>
                         @endif
-                        <h1 class="p-4 text-xl">Add Review</h1>
-                        <form method="POST" action="{{ route('review.store') }}" enctype="multipart/form-data"
-                            class="text-primary">
+                        <h1 class="p-4 text-xl">Edit Review</h1>
+                        <form method="POST" action="{{ route('review.update', ['id' => $review->id]) }}"
+                            enctype="multipart/form-data" class="text-primary">
+                            @method('put')
                             @csrf
-
 
                             <!-- name -->
                             <div class="col">
                                 <label class="form-label">Name</label>
-                                <input type="text" class="form-control" name="name" required autofocus
-                                    placeholder="Enter Menue name*">
+                                <input value="{{ $review->name }}" type="text" class="form-control" name="name"
+                                    required autofocus placeholder="Enter Menue name*">
                                 @error('name')
                                     <span class="text-danger">
                                         {{ $message }}
@@ -30,12 +30,11 @@
                                 @enderror
                             </div>
 
-
                             <!-- position -->
                             <div class="col">
                                 <label class="form-label">Position</label>
-                                <input type="text" class="form-control" name="position" required autofocus
-                                    placeholder="Enter Menue name*">
+                                <input value="{{ $review->position }}" type="text" class="form-control" name="position"
+                                    required autofocus placeholder="Enter Menue name*">
                                 @error('position')
                                     <span class="text-danger">
                                         {{ $message }}
@@ -46,8 +45,8 @@
                             <!-- image -->
                             <div class="col">
                                 <label class="form-label">Image</label>
-                                <input type="file" class="form-control" name="image" required autofocus
-                                    placeholder="Enter Menue name*">
+                                <input value="{{ asset('review_images/' . $review->image) }}" type="file"
+                                    class="form-control" name="image" required autofocus placeholder="Enter Menue name*">
                                 @error('image')
                                     <span class="text-danger">
                                         {{ $message }}
@@ -58,7 +57,9 @@
                             <!-- description -->
                             <div class="col my-3">
                                 <label class="form-label">Review Description</label>
-                                <textarea type="text" class="form-control" name="description" required autofocus placeholder="Enter Menue Details"></textarea>
+                                <textarea type="text" class="form-control" name="description" required autofocus placeholder="Enter Menue Details">
+                            {{ Str::squish($review->description) }}
+                            </textarea>
                                 @error('description')
                                     <span class="text-danger">
                                         {{ $message }}

@@ -6,10 +6,7 @@
                 <div class="col-lg-10">
                     <div class="card p-4">
 
-
-
-
-                        <h1 class="p-4 text-xl">Add Menue</h1>
+                        <h1 class="p-4 text-xl">Edit Menue</h1>
                         <form method="POST" action="{{ route('menu.update', ['id' => $menu->id]) }}"
                             enctype="multipart/form-data" class="text-primary">
                             @method('put')
@@ -68,7 +65,7 @@
                             <div class="col my-3">
                                 <label class="form-label">Menue Description</label>
                                 <textarea type="text" class="form-control" name="description" autofocus placeholder="Enter Menue Details">
-                                    {{ trim($menu->description) }}
+                                    {{ Str::squish($menu->description) }}
                                 </textarea>
                                 @error('description')
                                     <span class="text-danger">

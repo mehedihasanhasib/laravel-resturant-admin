@@ -25,9 +25,9 @@
                         <tbody>
                             @foreach ($menus as $menu)
                                 <tr>
-                                    <th scope="row">
+                                    <td scope="row">
                                         <img src="{{ 'menu_images/' . $menu->image }}" alt="image" width="50">
-                                    </th>
+                                    </td>
                                     <td class="align-middle"> {{ $menu->title }} </td>
                                     <td class="align-middle">{{ $menu->category }}</td>
                                     <td class="align-middle">{{ $menu->price }}</td>

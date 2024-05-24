@@ -3,6 +3,8 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\MenuController;
+use App\Http\Controllers\ReviewController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -19,17 +21,24 @@ Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/register', [AuthController::class, 'index']);
 
 
-// admin route
+// admin dashboard
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin')->middleware('AdminMiddleware');
-Route::get('/add_menue', [DashboardController::class, 'add_menue'])->name('add_menue')->middleware('AdminMiddleware');
-Route::post('/add_menue', [DashboardController::class, 'store'])->name('add_menue.store')->middleware('AdminMiddleware');
-Route::get('/menue', [DashboardController::class, 'menue'])->name('menue')->middleware('AdminMiddleware');
-Route::get('/menu/{id}', [DashboardController::class, 'edit'])->name('menu.edit')->middleware('AdminMiddleware');
-Route::put('/menu/{id}', [DashboardController::class, 'update'])->name('menu.update')->middleware('AdminMiddleware');
-Route::delete('/menu/{id}', [DashboardController::class, 'destroy'])->name('menu.delete')->middleware('AdminMiddleware');
 
-Route::get('/add_review', [DashboardController::class, 'add_review'])->name('add_review')->middleware('AdminMiddleware');
-Route::get('/manage_review', [DashboardController::class, 'manage_review'])->name('manage_review')->middleware('AdminMiddleware');
+// admin add menu
+Route::get('/menue', [MenuController::class, 'index'])->name('menue')->middleware('AdminMiddleware');
+Route::get('/add_menue', [MenuController::class, 'create'])->name('add_menue')->middleware('AdminMiddleware');
+Route::post('/add_menue', [MenuController::class, 'store'])->name('add_menue.store')->middleware('AdminMiddleware');
+Route::get('/menu/{id}', [MenuController::class, 'edit'])->name('menu.edit')->middleware('AdminMiddleware');
+Route::put('/menu/{id}', [MenuController::class, 'update'])->name('menu.update')->middleware('AdminMiddleware');
+Route::delete('/menu/{id}', [MenuController::class, 'destroy'])->name('menu.delete')->middleware('AdminMiddleware');
+
+// admin add review
+Route::get('/manage_review', [ReviewController::class, 'index'])->name('manage_review')->middleware('AdminMiddleware');
+Route::get('/add_review', [ReviewController::class, 'create'])->name('add_review')->middleware('AdminMiddleware');
+Route::post('/add_review', [ReviewController::class, 'store'])->name('review.store')->middleware('AdminMiddleware');
+Route::get('/review/{id}', [ReviewController::class, 'edit'])->name('review.edit')->middleware('AdminMiddleware');
+Route::put('/review/{id}', [ReviewController::class, 'update'])->name('review.update')->middleware('AdminMiddleware');
+Route::delete('/review/{id}', [ReviewController::class, 'destroy'])->name('review.delete')->middleware('AdminMiddleware');
 
 Route::get('/add_chefs', [DashboardController::class, 'add_chefs'])->name('add_chefs')->middleware('AdminMiddleware');
 Route::get('/manage_chefs', [DashboardController::class, 'manage_chefs'])->name('manage_chefs')->middleware('AdminMiddleware');
