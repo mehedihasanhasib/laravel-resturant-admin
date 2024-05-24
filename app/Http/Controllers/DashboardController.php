@@ -18,4 +18,17 @@ class DashboardController extends Controller
     {
         return view('admin.pages.manage_book_message');
     }
+
+    public function booking_store(Request $request)
+    {
+        DB::table('bookings')->insert([
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'date' => $request->date,
+            'time' => $request->time,
+            'person' => $request->person,
+            'message' => $request->message,
+        ]);
+    }
 }

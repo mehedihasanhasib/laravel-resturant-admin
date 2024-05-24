@@ -48,4 +48,6 @@ Route::get('/chefs/{id}', [ChefController::class, 'edit'])->name('add_chefs.edit
 Route::put('/chefs/{id}', [ChefController::class, 'update'])->name('add_chefs.update')->middleware('AdminMiddleware');
 Route::delete('/chefs/{id}', [ChefController::class, 'destroy'])->name('add_chefs.delete')->middleware('AdminMiddleware');
 
+// bookings
 Route::get('/manage_book_message', [DashboardController::class, 'manage_book_message'])->name('manage_book_message')->middleware('AdminMiddleware');
+Route::post('/booking', [DashboardController::class, 'booking_store'])->name('booking.store')->middleware('AdminMiddleware');
