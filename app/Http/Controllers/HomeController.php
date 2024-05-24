@@ -17,11 +17,15 @@ class HomeController extends Controller
         $lunches = DB::table('menus')->where('category', '=', 'lunche')->get();
         $dinners = DB::table('menus')->where('category', '=', 'dinner')->get();
 
+        // review
+        $reviews = DB::table('reviews')->get();
+
         return view('user.home', [
             'starters' => $starters,
             'breakfasts' => $breakfasts,
             'lunches' => $lunches,
             'dinners' => $dinners,
+            'reviews' => $reviews,
         ]);
     }
 }

@@ -40,7 +40,9 @@ Route::get('/review/{id}', [ReviewController::class, 'edit'])->name('review.edit
 Route::put('/review/{id}', [ReviewController::class, 'update'])->name('review.update')->middleware('AdminMiddleware');
 Route::delete('/review/{id}', [ReviewController::class, 'destroy'])->name('review.delete')->middleware('AdminMiddleware');
 
-Route::get('/add_chefs', [DashboardController::class, 'add_chefs'])->name('add_chefs')->middleware('AdminMiddleware');
+// admin add chefs
 Route::get('/manage_chefs', [DashboardController::class, 'manage_chefs'])->name('manage_chefs')->middleware('AdminMiddleware');
+Route::get('/add_chefs', [DashboardController::class, 'add_chefs'])->name('add_chefs')->middleware('AdminMiddleware');
+Route::post('/add_chefs', [DashboardController::class, 'add_chefs'])->name('add_chefs')->middleware('AdminMiddleware');
 
 Route::get('/manage_book_message', [DashboardController::class, 'manage_book_message'])->name('manage_book_message')->middleware('AdminMiddleware');
